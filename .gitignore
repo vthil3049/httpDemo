@@ -13,7 +13,7 @@ platforms/
 plugins/
 scss/
 lib/
-resources/
+
 
 .bowerrc
 .editorconfig
