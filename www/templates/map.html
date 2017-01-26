@@ -1,8 +1,11 @@
 <ion-view>
     <ion-content>
         <div id="map" data-tap-disabled="true" ng-show={{showMap}}></div>
-        <div id="test">
+        <div id="test" ng-show={{showMap}}>
           <h2>Position= {{latitude}},{{longitude}}</h2>
+        </div>
+        <div id="test2" ng-hide={{showMap}}>
+          <h2>Server not responding</h2>
         </div>
     </ion-content>
 </ion-view>

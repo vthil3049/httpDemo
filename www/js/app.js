@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 
 angular.module('starter', ['ionic', 'starter.services', 'ngCordova', 'ngResource'])
-.run(function($ionicPlatform,  $rootScope, $timeout, $ionicLoading) {
+.run(function($ionicPlatform,  $rootScope, $timeout, $ionicLoading,  $cordovaSplashscreen) {
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -20,6 +20,11 @@ angular.module('starter', ['ionic', 'starter.services', 'ngCordova', 'ngResource
     if(window.StatusBar) {
       StatusBar.styleDefault();
     }
+
+    $timeout(function(){
+      $cordovaSplashscreen.hide();
+    },5000);
+
   });
 })
 .config(function($stateProvider, $urlRouterProvider) {
@@ -40,7 +45,7 @@ angular.module('starter', ['ionic', 'starter.services', 'ngCordova', 'ngResource
   $urlRouterProvider.otherwise("/");
 
 })
-.controller('MapCtrl', ['$scope', '$timeout', '$ionicLoading','gpsFactory', 'sysGpsData', function($scope, $timeout, $ionicLoading, gpsFactory, sysGpsData){
+.controller('MapCtrl', ['$scope', '$timeout', '$ionicLoading', 'sysGpsData', function($scope, $timeout, $ionicLoading, sysGpsData){
 
     // $scope.latitude = 42.234234;
     // $scope.longitude = -71.21233;
@@ -56,7 +61,7 @@ angular.module('starter', ['ionic', 'starter.services', 'ngCordova', 'ngResource
     $timeout(function () {
         $ionicLoading.hide();
         $scope.stooges = [{name: 'Moe'}, {name: 'Larry'}, {name: 'Curly'}];
-      }, 1000);
+      }, 10);
 
     $scope.showMap = true;
     //console.log(sysGpsData);
@@ -115,57 +120,12 @@ angular.module('starter', ['ionic', 'starter.services', 'ngCordova', 'ngResource
         }
         ,
         function (response) {
+            $scope.showMap = false;
             $scope.message = "Error: " + response.status + " " + response.statusText;
             console.log($scope.message);
         }
       );
 
-          //   $scope.latitude = sysGpsData.latitude;
-          //   $scope.longitude = sysGpsData.longitude;
-          //   $scope.showMap = true;
-          //
-          //   var latLng = new google.maps.LatLng($scope.latitude, $scope.longitude);
-          // // var latLng = new google.maps.LatLng($scope.sysGpsData.latitude, $scope.sysGpsData.longitude);
-          //
-          //   var mapOptions = {
-          //     center: latLng,
-          //     zoom: 15,
-          //     mapTypeId: google.maps.MapTypeId.ROADMAP,
-          //     disableDefaultUI: true
-          //   };
-          //
-          //
-          //   $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
-          //   //new
-          //   google.maps.event.addListenerOnce($scope.map, 'idle', function(){
-          //
-          //     var marker = new google.maps.Marker({
-          //         map: $scope.map,
-          //         animation: google.maps.Animation.DROP,
-          //         position: latLng,
-          //         title: 'You are here'
-          //     });
-          //     var infoWindow = new google.maps.InfoWindow({
-          //         content: "CWS is here!"
-          //     });
-          //
-          //     google.maps.event.addListener(marker, 'click', function () {
-          //         infoWindow.open($scope.map, marker);
-          //     });
-          //
-          //     google.maps.event.addDomListener(window, "resize", function() {
-          //      var center = $scope.map.getCenter();
-          //      google.maps.event.trigger($scope.map, "resize");
-          //      $scope.map.setCenter(center);
-          //    });
-          //
-          //   });
-
-        // },
-    //     function(response) {
-    //         $scope.message = "Error: "+response.status + " " + response.statusText;
-    //     }
-    // );
 
 
 }]);
