@@ -5,8 +5,24 @@ angular.module('starter.services',  ['ngResource'])
 .service('gpsFactory', ['$resource', 'baseURL', function($resource,baseURL) {
 
     //console.log($resource(baseURL+"sysGpsData"));
-    return $resource(baseURL+"sysGpsData",{} , {'get':{method:'GET', isArray:false}});
+    //return $resource(baseURL+"sysGpsData",{} , {'get':{method:'GET', isArray:false}});
     // return $resource(baseURL+"sysGpsData", {}, {
     //       getGPS: {method:'GET', params:{} }
     // });
-}]);
+
+            return $resource(baseURL + "sysGpsData/:id");
+
+}])
+.service('lteModem', ['$resource', 'baseURL', function($resource,baseURL) {
+
+    //console.log($resource(baseURL+"sysGpsData"));
+    //return $resource(baseURL+"sysGpsData",{} , {'get':{method:'GET', isArray:false}});
+    // return $resource(baseURL+"sysGpsData", {}, {
+    //       getGPS: {method:'GET', params:{} }
+    // });
+
+            return $resource(baseURL + "sysGpsData/:id");
+
+}])
+
+;
